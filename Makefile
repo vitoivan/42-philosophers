@@ -16,6 +16,10 @@ all: $(NAME)
 run: all
 	./$(NAME) 5 800 200 200
 
+test:
+	@gcc -pthread -g test.c -o test
+	@./test
+
 $(NAME): $(DIRS) $(OBJECTS) 
 	$(CC)  $(OBJECTS) $(LFLAGS) -o $(NAME)
 
@@ -34,4 +38,4 @@ fclean: clean
 re: fclean all
 
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re run test
