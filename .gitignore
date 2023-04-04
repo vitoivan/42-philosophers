@@ -1,0 +1,7 @@
+*.o
+philo
+philosophers
+*.a
+*.so
+.vscode
+dist*
