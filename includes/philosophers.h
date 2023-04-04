@@ -1,7 +1,9 @@
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include "../libs/libft/includes/libft.h"
 # include "./utils.h"
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 #endif

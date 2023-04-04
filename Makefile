@@ -1,7 +1,6 @@
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g -c 
 LFLAGS = -pthread
-LIBFT = libs/libft/libft.a
 NAME = philosophers
 
 OBJ_DIR = dist
@@ -15,8 +14,11 @@ OBJECTS = $(addprefix $(OBJ_DIR)/, $(TARGETS:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(DIRS) $(LIBFT) $(OBJECTS) 
-	$(CC)  $(OBJECTS) $(LFLAGS) $(LIBFT) -o $(NAME)
+run: all
+	./$(NAME) 5 800 200 200
+
+$(NAME): $(DIRS)  $(OBJECTS) 
+	$(CC)  $(OBJECTS) $(LFLAGS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: src/%.c
 	$(CC) $(CFLAGS) $< -o $@
@@ -24,18 +26,13 @@ $(OBJ_DIR)/%.o: src/%.c
 $(DIRS):
 	mkdir -p $(DIRS)
 
-$(LIBFT):
-	make -C libs/libft
-
 clean:
 	rm -rf $(OBJ_DIR)
-	make clean -C libs/libft
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C libs/libft
 
 re: fclean all
 
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re run

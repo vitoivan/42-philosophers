@@ -6,7 +6,7 @@
 /*   By: victor.simoes <victor.simoes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/04 10:46:11 by victor.simo      ###   ########.fr       */
+/*   Updated: 2023/04/04 10:49:13 by victor.simo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	main(int argc, char **argv)
 		print_usage_message();
 		return (1);
 	}
-	ft_printf("argc: %d\n", argc);
+	printf("argc: %d\n", argc);
 	while (*argv)
-		ft_printf("argv: %s\n", *argv++);
+		printf("argv: %s\n", *argv++);
 	return (0);
 }
