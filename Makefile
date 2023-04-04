@@ -7,14 +7,18 @@ OBJ_DIR = dist
 DIRS = 	$(OBJ_DIR)
 
 TARGETS = 	main.c \
-			print_usage_message.c
+			validate_args.c \
+			ft_isdigit.c \
+			ft_strlen.c \
+			ft_strcmp.c \
+			ft_atoi.c
 	
 OBJECTS = $(addprefix $(OBJ_DIR)/, $(TARGETS:.c=.o))
 
 all: $(NAME)
 
 run: all
-	./$(NAME) 5 800 200 200
+	./$(NAME) 1 50 200 200
 
 $(NAME): $(DIRS) $(OBJECTS) 
 	$(CC)  $(OBJECTS) $(LFLAGS) -o $(NAME)

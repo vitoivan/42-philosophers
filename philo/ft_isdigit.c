@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: victor.simoes <victor.simoes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/04 12:59:28 by victor.simo      ###   ########.fr       */
+/*   Created: 2021/08/19 15:34:30 by victor            #+#    #+#             */
+/*   Updated: 2023/04/04 13:12:08 by victor.simo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./philosophers.h"
-
-int	main(int argc, char **argv)
+int	ft_isdigit(int ch)
 {
-	if (validate_args(argc, argv))
-		return (1);
-	printf("argc: %d\n", argc);
-	while (*argv)
-		printf("argv: %s\n", *argv++);
+	if (ch >= '0' && ch <= '9')
+		return (2048);
 	return (0);
 }
