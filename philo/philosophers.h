@@ -6,7 +6,7 @@
 /*   By: victor.simoes <victor.simoes@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/04 13:32:25 by victor.simo      ###   ########.fr       */
+/*   Updated: 2023/04/05 09:05:43 by victor.simo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,60 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-int		validate_args(int argc, char **argv);
-int		ft_isdigit(int ch);
-int		ft_atoi(const char *nptr);
-int		ft_strcmp(const char *s1, const char *s2);
-size_t	ft_strlen(const char *s);
+typedef enum e_actions
+{
+	FORK = 1,
+	EAT,
+	SLEEP,
+	THINK,
+	DIED
+}					t_e_actions;
+
+typedef struct s_philo
+{
+	int				id;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	int				time_to_die;
+	int				last_eat;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_count;
+	pthread_t		*thread;
+	pthread_mutex_t	*someone_died_mutex;
+	pthread_mutex_t	*print_mutex;
+	int				*someone_died_flag;
+}					t_philo;
+
+typedef struct s_ctx
+{
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				philo_count;
+	int				must_eat_count;
+	t_philo			**philos;
+	pthread_mutex_t	**forks;
+	pthread_mutex_t	someone_died_mutex;
+	pthread_mutex_t	print_mutex;
+	int				someone_died_flag;
+}					t_ctx;
+
+typedef struct s_worker_params
+{
+	t_ctx			*ctx;
+	int				index;
+}					t_worker_params;
+
+int					validate_args(int argc, char **argv);
+int					ft_isdigit(int ch);
+int					ft_atoi(const char *nptr);
+int					ft_strcmp(const char *s1, const char *s2);
+size_t				ft_strlen(const char *s);
+t_ctx				*init_ctx(int argc, char **args);
+void				free_ctx(t_ctx *ctx);
 
 #endif

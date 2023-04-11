@@ -9,6 +9,7 @@ DIRS = 	$(OBJ_DIR)
 TARGETS = 	main.c \
 			validate_args.c \
 			ft_isdigit.c \
+			context.c \
 			ft_strlen.c \
 			ft_strcmp.c \
 			ft_atoi.c
@@ -36,6 +37,10 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+valgrind: $(NAME)
+
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 2 800 200 200
 
 
 .PHONY: all clean fclean re run test
