@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/17 09:39:10 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/17 12:27:08 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	print_action(t_philo *philo, t_e_actions action)
 		return (1);
 	}
 	printf("%d %d ", now - philo->ctx->start_time, philo->id);
-	if (now - philo->last_eat >= philo->ctx->time_to_die)
+	if (action == DIED)
 	{
 		printf("died\n");
 		philo->ctx->someone_died_flag = 1;

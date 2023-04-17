@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/17 09:59:09 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/17 13:26:06 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	should_run(t_philo *philo)
 		return (1);
 	else if (philo->eat_count < philo->ctx->must_eat_count)
 		return (1);
+	philo->ctx->full_philos++;
 	return (0);
 }
 
@@ -51,6 +52,7 @@ void	*philo_worker(void *philo_v)
 		if (print_action(philo, THINK))
 			break ;
 	}
+	increase_full_philos(philo->ctx);
 	return (NULL);
 }
 
@@ -71,12 +73,14 @@ int	main(int argc, char **argv)
 			(void *)ctx->philos[i]);
 		i++;
 	}
+	pthread_create(ctx->monitor_thread, NULL, monitor, (void *)ctx);
 	i = 0;
 	while (i < ctx->philo_count)
 	{
 		pthread_join(*ctx->philos[i]->thread, NULL);
 		i++;
 	}
+	pthread_join(*ctx->monitor_thread, NULL);
 	free_ctx(ctx);
 	return (0);
 }

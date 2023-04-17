@@ -15,6 +15,7 @@ TARGETS = 	main.c \
 			ft_strlen.c \
 			ft_strcmp.c \
 			print_action.c \
+			monitor.c \
 			eat.c \
 			ft_atoi.c
 	

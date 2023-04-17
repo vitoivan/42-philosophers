@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/17 09:40:24 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/17 13:33:36 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_philo
 	int				id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*eating_mutex;
+	int				eating_flag;
 	int				eat_count;
 	pthread_t		*thread;
 	int				last_eat;
@@ -55,6 +57,9 @@ typedef struct s_ctx
 	pthread_mutex_t	print_mutex;
 	int				someone_died_flag;
 	int				start_time;
+	pthread_t		*monitor_thread;
+	pthread_mutex_t	full_philos_mutex;
+	int				full_philos;
 }					t_ctx;
 
 typedef struct s_worker_params
@@ -75,5 +80,9 @@ int					get_forks(t_philo *philo);
 int					fold_forks(t_philo *philo);
 int					print_action(t_philo *philo, t_e_actions action);
 int					eat(t_philo *philo);
-
+void				set_eating_flag(t_philo *philo, int flag);
+int					get_eating_flag(t_philo *philo);
+void				*monitor(void *v_ctx);
+int					get_full_philos(t_ctx *ctx);
+void				increase_full_philos(t_ctx *ctx);
 #endif
