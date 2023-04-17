@@ -1,7 +1,8 @@
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g -c 
+CFLAGS = -Wall -Wextra -Werror  -c
+DEBUG = -g -gdwarf-4
 LFLAGS = -pthread
-NAME = philo/philo
+NAME = philo
 
 OBJ_DIR = dist
 DIRS = 	$(OBJ_DIR)
@@ -10,8 +11,11 @@ TARGETS = 	main.c \
 			validate_args.c \
 			ft_isdigit.c \
 			context.c \
+			forks.c \
 			ft_strlen.c \
 			ft_strcmp.c \
+			print_action.c \
+			eat.c \
 			ft_atoi.c
 	
 OBJECTS = $(addprefix $(OBJ_DIR)/, $(TARGETS:.c=.o))
@@ -19,13 +23,13 @@ OBJECTS = $(addprefix $(OBJ_DIR)/, $(TARGETS:.c=.o))
 all: $(NAME)
 
 run: all
-	./$(NAME) 1 50 200 200
+	./$(NAME) 5 460 200 200
 
 $(NAME): $(DIRS) $(OBJECTS) 
 	$(CC)  $(OBJECTS) $(LFLAGS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: philo/%.c
-	$(CC) $(CFLAGS) $< -o $@
+$(OBJ_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) $(DEBUG) $< -o $@
 
 $(DIRS):
 	mkdir -p $(DIRS)
@@ -39,7 +43,6 @@ fclean: clean
 re: fclean all
 
 valgrind: $(NAME)
-
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 2 800 200 200
 
 

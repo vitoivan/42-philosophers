@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   context.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor.simoes <victor.simoes@student.42    +#+  +:+       +#+        */
+/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:00:13 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/05 09:04:40 by victor.simo      ###   ########.fr       */
+/*   Updated: 2023/04/12 13:07:32 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,7 @@ static void	init_philos(t_ctx **ctx)
 			(*ctx)->philos[i]->right_fork = (*ctx)->forks[i];
 		}
 		(*ctx)->philos[i]->thread = (pthread_t *)malloc(sizeof(pthread_t));
-		(*ctx)->philos[i]->time_to_die = (*ctx)->time_to_die;
-		(*ctx)->philos[i]->time_to_eat = (*ctx)->time_to_eat;
-		(*ctx)->philos[i]->time_to_sleep = (*ctx)->time_to_sleep;
-		(*ctx)->philos[i]->eat_count = 0;
-		(*ctx)->philos[i]->someone_died_mutex = &(*ctx)->someone_died_mutex;
-		(*ctx)->philos[i]->print_mutex = &(*ctx)->print_mutex;
-		(*ctx)->philos[i]->someone_died_flag = &(*ctx)->someone_died_flag;
+		(*ctx)->philos[i]->ctx = *ctx;
 		i++;
 	}
 }
@@ -71,6 +65,7 @@ t_ctx	*init_ctx(int argc, char **args)
 	ctx->time_to_eat = ft_atoi(args[3]);
 	ctx->time_to_sleep = ft_atoi(args[4]);
 	ctx->someone_died_flag = 0;
+	ctx->start_time = get_time();
 	if (argc == 6)
 		ctx->must_eat_count = ft_atoi(args[5]);
 	else

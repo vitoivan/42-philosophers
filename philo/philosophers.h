@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor.simoes <victor.simoes@student.42    +#+  +:+       +#+        */
+/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/05 09:05:43 by victor.simo      ###   ########.fr       */
+/*   Updated: 2023/04/17 09:40:24 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,17 @@ typedef enum e_actions
 	DIED
 }					t_e_actions;
 
+struct	s_ctx;
+
 typedef struct s_philo
 {
 	int				id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	int				time_to_die;
-	int				last_eat;
-	int				time_to_eat;
-	int				time_to_sleep;
 	int				eat_count;
 	pthread_t		*thread;
-	pthread_mutex_t	*someone_died_mutex;
-	pthread_mutex_t	*print_mutex;
-	int				*someone_died_flag;
+	int				last_eat;
+	struct s_ctx	*ctx;
 }					t_philo;
 
 typedef struct s_ctx
@@ -57,6 +54,7 @@ typedef struct s_ctx
 	pthread_mutex_t	someone_died_mutex;
 	pthread_mutex_t	print_mutex;
 	int				someone_died_flag;
+	int				start_time;
 }					t_ctx;
 
 typedef struct s_worker_params
@@ -72,5 +70,10 @@ int					ft_strcmp(const char *s1, const char *s2);
 size_t				ft_strlen(const char *s);
 t_ctx				*init_ctx(int argc, char **args);
 void				free_ctx(t_ctx *ctx);
+int					get_time(void);
+int					get_forks(t_philo *philo);
+int					fold_forks(t_philo *philo);
+int					print_action(t_philo *philo, t_e_actions action);
+int					eat(t_philo *philo);
 
 #endif
