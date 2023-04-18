@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor.simoes <victor.simoes@student.42    +#+  +:+       +#+        */
+/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:27:37 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/04 13:41:22 by victor.simo      ###   ########.fr       */
+/*   Updated: 2023/04/17 15:17:11 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	print_messages(int n_philo, int die_time, int eat_time,
 	int	has_error;
 
 	has_error = 0;
-	if (n_philo < 2)
-		print_error_message("Number of philosophers must be greater than 1",
+	if (n_philo < 1)
+		print_error_message("Number of philosophers must be greater than 0",
 			&has_error);
 	if (die_time < 60)
 		print_error_message("Time to die must be greater than 60ms",

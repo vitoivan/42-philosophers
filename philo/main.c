@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/17 13:26:06 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 13:21:55 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	*philo_worker(void *philo_v)
 
 	philo = (t_philo *)philo_v;
 	philo->last_eat = get_time();
+	if (philo->ctx->philo_count == 1)
+	{
+		print_action(philo, FORK);
+		return (NULL);
+	}
 	while (1 && should_run(philo))
 	{
 		if (get_forks(philo))
