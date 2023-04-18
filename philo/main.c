@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 14:29:12 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:53:28 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int argc, char **argv)
 {
 	t_ctx	*ctx;
 	int		i;
+	t_monitor_data *data;
 
 	if (validate_args(argc, argv))
 		return (1);
@@ -82,20 +83,25 @@ int	main(int argc, char **argv)
 	if (!ctx)
 		return (1);
 	i = 0;
+	data = malloc(sizeof(t_monitor_data) * ctx->philo_count);
 	while (i < ctx->philo_count)
 	{
+		data[i].i = i;
+		data[i].ctx = ctx;
 		pthread_create(ctx->philos[i]->thread, NULL, philo_worker,
 			(void *)ctx->philos[i]);
+		pthread_create(&ctx->monitor_threads[i], NULL, monitor, (void *)&data[i]);
 		i++;
+
 	}
-	pthread_create(ctx->monitor_thread, NULL, monitor, (void *)ctx);
 	i = 0;
 	while (i < ctx->philo_count)
 	{
 		pthread_join(*ctx->philos[i]->thread, NULL);
+		pthread_join(ctx->monitor_threads[i], NULL);
 		i++;
 	}
-	pthread_join(*ctx->monitor_thread, NULL);
 	free_ctx(ctx);
+	free(data);
 	return (0);
 }

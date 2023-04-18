@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/17 13:33:00 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:47:06 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,19 @@ int	monitor_single_philo(t_ctx *ctx, int *i)
 	return (1);
 }
 
-void	*monitor(void *v_ctx)
+void	*monitor(void *v_monitor_data)
 {
 	t_ctx	*ctx;
+	t_monitor_data	*data;
 	int		i;
 
-	i = 0;
-	ctx = (t_ctx *)v_ctx;
+	data = (t_monitor_data *)v_monitor_data;
+	ctx = data->ctx;
+	i = data->i;
 	while (1 && get_full_philos(ctx) < ctx->philo_count)
 	{
 		if (!monitor_single_philo(ctx, &i))
 			break ;
-		i++;
-		if (i >= ctx->philo_count)
-			i = 0;
 	}
 	return (NULL);
 }

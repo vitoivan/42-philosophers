@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:00:13 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/17 13:25:49 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:45:55 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_ctx	*init_ctx(int argc, char **args)
 		ctx->must_eat_count = ft_atoi(args[5]);
 	else
 		ctx->must_eat_count = -1;
-	ctx->monitor_thread = (pthread_t *)malloc(sizeof(pthread_t));
+	ctx->monitor_threads = (pthread_t *)malloc(sizeof(pthread_t) * ctx->philo_count);
 	pthread_mutex_init(&ctx->someone_died_mutex, NULL);
 	pthread_mutex_init(&ctx->print_mutex, NULL);
 	pthread_mutex_init(&ctx->full_philos_mutex, NULL);
@@ -107,7 +107,7 @@ void	free_ctx(t_ctx *ctx)
 		i++;
 	}
 	free(ctx->philos);
-	free(ctx->monitor_thread);
+	free(ctx->monitor_threads);
 	free(ctx->forks);
 	pthread_mutex_destroy(&ctx->someone_died_mutex);
 	pthread_mutex_destroy(&ctx->print_mutex);

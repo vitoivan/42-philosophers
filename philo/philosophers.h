@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 14:29:19 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:45:12 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,16 @@ typedef struct s_ctx
 	pthread_mutex_t	print_mutex;
 	int				someone_died_flag;
 	int				start_time;
-	pthread_t		*monitor_thread;
+	pthread_t		*monitor_threads;
 	pthread_mutex_t	full_philos_mutex;
 	int				full_philos;
 }					t_ctx;
+
+typedef struct s_monitor_data
+{
+	t_ctx	*ctx;
+	int		i;
+}					t_monitor_data;
 
 typedef struct s_worker_params
 {
