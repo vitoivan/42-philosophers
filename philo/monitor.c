@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/18 14:47:06 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 16:59:37 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	monitor_single_philo(t_ctx *ctx, int *i)
 
 void	*monitor(void *v_monitor_data)
 {
-	t_ctx	*ctx;
+	t_ctx			*ctx;
 	t_monitor_data	*data;
-	int		i;
+	int				i;
 
 	data = (t_monitor_data *)v_monitor_data;
 	ctx = data->ctx;

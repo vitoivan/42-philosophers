@@ -14,6 +14,7 @@ TARGETS = 	main.c \
 			forks.c \
 			ft_strlen.c \
 			ft_strcmp.c \
+			ft_sleep.c \
 			print_action.c \
 			monitor.c \
 			eat.c \

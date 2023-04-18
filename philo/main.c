@@ -6,21 +6,11 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 14:53:28 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 16:59:09 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philosophers.h"
-
-int	ft_sleep(time_t time)
-{
-	time_t	start;
-
-	start = get_time();
-	while (time > get_time() - start)
-		usleep(100);
-	return (1);
-}
 
 time_t	get_time(void)
 {
@@ -71,17 +61,10 @@ void	*philo_worker(void *philo_v)
 	return (NULL);
 }
 
-int	main(int argc, char **argv)
+static void	create_threads(t_ctx *ctx, t_monitor_data *data)
 {
-	t_ctx	*ctx;
-	int		i;
-	t_monitor_data *data;
+	int	i;
 
-	if (validate_args(argc, argv))
-		return (1);
-	ctx = init_ctx(argc, argv);
-	if (!ctx)
-		return (1);
 	i = 0;
 	data = malloc(sizeof(t_monitor_data) * ctx->philo_count);
 	while (i < ctx->philo_count)
@@ -90,10 +73,25 @@ int	main(int argc, char **argv)
 		data[i].ctx = ctx;
 		pthread_create(ctx->philos[i]->thread, NULL, philo_worker,
 			(void *)ctx->philos[i]);
-		pthread_create(&ctx->monitor_threads[i], NULL, monitor, (void *)&data[i]);
+		pthread_create(&ctx->monitor_threads[i], NULL, monitor,
+			(void *)&data[i]);
 		i++;
-
 	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_ctx			*ctx;
+	int				i;
+	t_monitor_data	*data;
+
+	if (validate_args(argc, argv))
+		return (1);
+	ctx = init_ctx(argc, argv);
+	data = NULL;
+	if (!ctx)
+		return (1);
+	create_threads(ctx, data);
 	i = 0;
 	while (i < ctx->philo_count)
 	{
