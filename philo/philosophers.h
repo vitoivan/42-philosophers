@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 14:45:12 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 17:53:48 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void				*monitor(void *v_ctx);
 int					get_full_philos(t_ctx *ctx);
 void				increase_full_philos(t_ctx *ctx);
 int					ft_sleep(time_t time);
+int					validate_philo_worker(t_philo *philo);
 #endif

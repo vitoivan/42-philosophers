@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 17:17:12 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 17:53:36 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ time_t	get_time(void)
 
 static int	should_run(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-		ft_sleep(2);
 	if (philo->ctx->must_eat_count == -1)
 		return (1);
 	else if (philo->eat_count < philo->ctx->must_eat_count)
@@ -40,11 +38,8 @@ void	*philo_worker(void *philo_v)
 
 	philo = (t_philo *)philo_v;
 	philo->last_eat = get_time();
-	if (philo->ctx->philo_count == 1)
-	{
-		print_action(philo, FORK);
+	if (!validate_philo_worker(philo))
 		return (NULL);
-	}
 	while (1 && should_run(philo))
 	{
 		if (get_forks(philo))

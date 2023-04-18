@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/18 17:15:49 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 17:53:51 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,19 @@ int	monitor_single_philo(t_ctx *ctx, int *i)
 	}
 	pthread_mutex_unlock(&ctx->someone_died_mutex);
 	pthread_mutex_unlock(&ctx->print_mutex);
+	return (1);
+}
+
+int	validate_philo_worker(t_philo *philo)
+{
+	if (philo->ctx->philo_count == 1)
+	{
+		print_action(philo, FORK);
+		return (0);
+	}
+	if (philo->id % 2 == 0)
+		ft_sleep(2);
+	philo->last_eat = get_time();
 	return (1);
 }
 
