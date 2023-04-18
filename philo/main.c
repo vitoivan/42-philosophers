@@ -6,11 +6,21 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 13:21:55 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:15:50 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philosophers.h"
+
+int	ft_sleep(int time)
+{
+	int	start;
+
+	start = get_time();
+	while (get_time() - start < time)
+		usleep(100);
+	return (1);
+}
 
 int	get_time(void)
 {
@@ -43,7 +53,7 @@ void	*philo_worker(void *philo_v)
 		print_action(philo, FORK);
 		return (NULL);
 	}
-	while (1 && should_run(philo))
+	while (1 && should_run(philo) && ft_sleep(100))
 	{
 		if (get_forks(philo))
 			break ;
@@ -53,7 +63,7 @@ void	*philo_worker(void *philo_v)
 		if (print_action(philo, SLEEP))
 			break ;
 		else
-			usleep(philo->ctx->time_to_sleep * 1000);
+			ft_sleep(philo->ctx->time_to_sleep * 1000);
 		if (print_action(philo, THINK))
 			break ;
 	}

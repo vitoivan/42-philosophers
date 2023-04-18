@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/17 13:33:36 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:15:37 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ int					get_eating_flag(t_philo *philo);
 void				*monitor(void *v_ctx);
 int					get_full_philos(t_ctx *ctx);
 void				increase_full_philos(t_ctx *ctx);
+int					ft_sleep(int time);
 #endif
