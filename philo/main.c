@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 16:59:09 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 17:03:04 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	*philo_worker(void *philo_v)
 		print_action(philo, FORK);
 		return (NULL);
 	}
+	if (philo->id % 2 == 0)
+		ft_sleep(1);
 	while (1 && should_run(philo))
 	{
 		if (get_forks(philo))
