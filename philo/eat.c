@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/18 14:27:48 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 17:15:04 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	eat(t_philo *philo)
 	}
 	else
 	{
-		ft_sleep(philo->ctx->time_to_eat);
 		philo->last_eat = get_time();
+		ft_sleep(philo->ctx->time_to_eat);
 		philo->eat_count++;
 	}
 	set_eating_flag(philo, 0);
