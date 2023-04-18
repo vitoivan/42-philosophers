@@ -6,26 +6,26 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 14:15:50 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:29:12 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./philosophers.h"
 
-int	ft_sleep(int time)
+int	ft_sleep(time_t time)
 {
-	int	start;
+	time_t	start;
 
 	start = get_time();
-	while (get_time() - start < time)
+	while (time > get_time() - start)
 		usleep(100);
 	return (1);
 }
 
-int	get_time(void)
+time_t	get_time(void)
 {
 	struct timeval	tv;
-	int				time;
+	time_t			time;
 
 	gettimeofday(&tv, NULL);
 	time = (tv.tv_sec * 1000) + tv.tv_usec / 1000;
@@ -53,7 +53,7 @@ void	*philo_worker(void *philo_v)
 		print_action(philo, FORK);
 		return (NULL);
 	}
-	while (1 && should_run(philo) && ft_sleep(100))
+	while (1 && should_run(philo))
 	{
 		if (get_forks(philo))
 			break ;
@@ -63,7 +63,7 @@ void	*philo_worker(void *philo_v)
 		if (print_action(philo, SLEEP))
 			break ;
 		else
-			ft_sleep(philo->ctx->time_to_sleep * 1000);
+			ft_sleep(philo->ctx->time_to_sleep);
 		if (print_action(philo, THINK))
 			break ;
 	}

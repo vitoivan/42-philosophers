@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 14:15:37 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:29:19 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 size_t				ft_strlen(const char *s);
 t_ctx				*init_ctx(int argc, char **args);
 void				free_ctx(t_ctx *ctx);
-int					get_time(void);
+time_t				get_time(void);
 int					get_forks(t_philo *philo);
 int					fold_forks(t_philo *philo);
 int					print_action(t_philo *philo, t_e_actions action);
@@ -85,5 +85,5 @@ int					get_eating_flag(t_philo *philo);
 void				*monitor(void *v_ctx);
 int					get_full_philos(t_ctx *ctx);
 void				increase_full_philos(t_ctx *ctx);
-int					ft_sleep(int time);
+int					ft_sleep(time_t time);
 #endif
