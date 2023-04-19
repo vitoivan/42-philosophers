@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 17:53:36 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:19:50 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	*philo_worker(void *philo_v)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_v;
-	philo->last_eat = get_time();
+	set_last_eat(philo);
 	if (!validate_philo_worker(philo))
 		return (NULL);
 	while (1 && should_run(philo))
@@ -63,7 +63,6 @@ static void	create_threads(t_ctx *ctx, t_monitor_data *data)
 	int	i;
 
 	i = 0;
-	data = malloc(sizeof(t_monitor_data) * ctx->philo_count);
 	while (i < ctx->philo_count)
 	{
 		data[i].i = i;
@@ -85,7 +84,7 @@ int	main(int argc, char **argv)
 	if (validate_args(argc, argv))
 		return (1);
 	ctx = init_ctx(argc, argv);
-	data = NULL;
+	data = malloc(sizeof(t_monitor_data) * ctx->philo_count);
 	if (!ctx)
 		return (1);
 	create_threads(ctx, data);

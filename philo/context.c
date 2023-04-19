@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:00:13 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 17:16:56 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 21:43:24 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_philo(t_ctx **ctx, int i)
 	(*ctx)->philos[i]->eating_mutex = (pthread_mutex_t *)malloc(
 			sizeof(pthread_mutex_t));
 	pthread_mutex_init((*ctx)->philos[i]->eating_mutex, NULL);
+	pthread_mutex_init(&(*ctx)->philos[i]->last_eat_mutex, NULL);
 }
 
 static void	init_philos(t_ctx **ctx)

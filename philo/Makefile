@@ -6,6 +6,7 @@ NAME = philo
 
 OBJ_DIR = dist
 DIRS = 	$(OBJ_DIR)
+VALGRIND = valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes
 
 TARGETS = 	main.c \
 			validate_args.c \
@@ -45,7 +46,7 @@ fclean: clean
 re: fclean all
 
 valgrind: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 2 800 200 200
+	$(VALGRIND) ./$(NAME) 4 410 200 200
 
 
 .PHONY: all clean fclean re run test

@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/18 17:53:51 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:25:26 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	increase_full_philos(t_ctx *ctx)
 int	monitor_single_philo(t_ctx *ctx, int *i)
 {
 	t_philo	*philo;
-	int		now;
+	int	now;
 
 	philo = ctx->philos[*i];
 	now = get_time();
+	usleep(50 * 1000);
 	pthread_mutex_lock(&ctx->someone_died_mutex);
 	pthread_mutex_lock(&ctx->print_mutex);
 	if (ctx->someone_died_flag == 1)
@@ -44,7 +45,7 @@ int	monitor_single_philo(t_ctx *ctx, int *i)
 		pthread_mutex_unlock(&ctx->print_mutex);
 		return (0);
 	}
-	if (now - philo->last_eat > ctx->time_to_die && !get_eating_flag(philo))
+	if (now - get_last_eat(philo) > ctx->time_to_die && !get_eating_flag(philo))
 	{
 		printf("%d %d died\n", now - philo->ctx->start_time, philo->id);
 		ctx->someone_died_flag = 1;
@@ -66,7 +67,7 @@ int	validate_philo_worker(t_philo *philo)
 	}
 	if (philo->id % 2 == 0)
 		ft_sleep(2);
-	philo->last_eat = get_time();
+	set_last_eat(philo);
 	return (1);
 }
 
@@ -83,6 +84,7 @@ void	*monitor(void *v_monitor_data)
 	{
 		if (!monitor_single_philo(ctx, &i))
 			break ;
+		usleep(500);
 	}
 	return (NULL);
 }

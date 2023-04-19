@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 17:53:48 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:23:20 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*eating_mutex;
+	pthread_mutex_t	last_eat_mutex;
 	int				eating_flag;
 	int				eat_count;
 	pthread_t		*thread;
@@ -93,4 +94,6 @@ int					get_full_philos(t_ctx *ctx);
 void				increase_full_philos(t_ctx *ctx);
 int					ft_sleep(time_t time);
 int					validate_philo_worker(t_philo *philo);
+int					get_last_eat(t_philo *philo);
+void				set_last_eat(t_philo *philo);
 #endif
