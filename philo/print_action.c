@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/17 12:27:08 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:58:14 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	lock_print_mutex(t_philo **philo)
 {
-	pthread_mutex_lock(&(*philo)->ctx->someone_died_mutex);
 	pthread_mutex_lock(&(*philo)->ctx->print_mutex);
+	pthread_mutex_lock(&(*philo)->ctx->someone_died_mutex);
 }
 
 static void	unlock_print_mutex(t_philo **philo)
