@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/18 22:25:26 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:36:11 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	increase_full_philos(t_ctx *ctx)
 int	monitor_single_philo(t_ctx *ctx, int *i)
 {
 	t_philo	*philo;
-	int	now;
+	int		now;
 
 	philo = ctx->philos[*i];
 	now = get_time();
