@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:00:13 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 21:43:24 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:40:16 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	init_philo(t_ctx **ctx, int i)
 	(*ctx)->philos[i] = (t_philo *)malloc(sizeof(t_philo));
 	(*ctx)->philos[i]->id = i + 1;
 	(*ctx)->philos[i]->eat_count = 0;
+	(*ctx)->philos[i]->last_eat = -1;
 	(*ctx)->philos[i]->left_fork = (*ctx)->forks[i];
 	(*ctx)->philos[i]->right_fork = (*ctx)->forks[(i + 1)
 		% (*ctx)->philo_count];
