@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/18 23:57:02 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/19 00:03:47 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	monitor_single_philo(t_ctx *ctx, int *i)
 
 	philo = ctx->philos[*i];
 	now = get_time();
-	usleep(50 * 1000);
 	pthread_mutex_lock(&ctx->print_mutex);
 	pthread_mutex_lock(&ctx->someone_died_mutex);
 	if (ctx->someone_died_flag == 1)
