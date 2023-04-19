@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 22:19:50 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:31:07 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	should_run(t_philo *philo)
 		return (1);
 	else if (philo->eat_count < philo->ctx->must_eat_count)
 		return (1);
-	philo->ctx->full_philos++;
 	return (0);
 }
 
