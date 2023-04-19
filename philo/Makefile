@@ -1,9 +1,9 @@
 CC = clang
-CFLAGS = -Wall -Wextra -Werror  -c 
-DEBUG = -gdwarf-4 -g
+CFLAGS = -Wall -Wextra -Werror -c -g
+DEBUG = -gdwarf-4
 LFLAGS = -pthread
-DEBUG = -gdwarf-4 -g -fsanitize=thread
-LFLAGS = -pthread -fsanitize=thread
+# DEBUG = -gdwarf-4 -fsanitize=thread
+# LFLAGS = -pthread -fsanitize=thread
 NAME = philo
 
 OBJ_DIR = dist
@@ -48,7 +48,7 @@ fclean: clean
 re: fclean all
 
 valgrind: $(NAME)
-	$(VALGRIND) ./$(NAME) 4 410 200 200
+	$(VALGRIND) ./$(NAME) 4 600 200 200 5
 
 
 .PHONY: all clean fclean re run test
