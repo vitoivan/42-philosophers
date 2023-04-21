@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/21 14:37:18 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/21 19:51:51 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		get_fork_status(t_fork *fork)
 {
 	int	is_taken;
 	
-	usleep(100);
 	pthread_mutex_lock(&fork->is_taken_mutex);
 	is_taken = fork->is_taken;
 	pthread_mutex_unlock(&fork->is_taken_mutex);
@@ -68,7 +67,7 @@ int take_left_and_wait_right(t_philo *philo)
 		return (1);
 	}
 	while (get_fork_status(philo->right_fork))
-		usleep(500);
+		usleep(100);
 	take_fork(philo->right_fork, philo);
 	if (print_action(philo, FORK))
 	{
@@ -89,8 +88,8 @@ int	get_forks(t_philo *philo)
 	right_fork_was_taken = 1;
 	while(left_fork_was_taken || right_fork_was_taken)
 	{
-		left_fork_was_taken = philo->left_fork->is_taken;
-		right_fork_was_taken = philo->right_fork->is_taken;
+		left_fork_was_taken = get_fork_status(philo->left_fork);
+		right_fork_was_taken = get_fork_status(philo->right_fork);
 		usleep(100);
 	}
 	if (!left_fork_was_taken)

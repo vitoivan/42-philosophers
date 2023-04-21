@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   context.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:00:13 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/21 13:43:31 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/21 20:05:26 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	init_philo(t_ctx **ctx, int i)
 	(*ctx)->philos[i]->thread = (pthread_t *)malloc(sizeof(pthread_t));
 	(*ctx)->philos[i]->ctx = *ctx;
 	(*ctx)->philos[i]->eating_flag = 0;
+	(*ctx)->philos[i]->is_full = 0;
 	(*ctx)->philos[i]->eating_mutex = (pthread_mutex_t *)malloc(
 			sizeof(pthread_mutex_t));
 	pthread_mutex_init((*ctx)->philos[i]->eating_mutex, NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/21 14:42:14 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/21 20:09:29 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ static int	should_run(t_philo *philo)
 		return (1);
 	else if (philo->eat_count < philo->ctx->must_eat_count)
 		return (1);
+	pthread_mutex_lock(&philo->ctx->someone_died_mutex);
+	philo->is_full = 1;
+	pthread_mutex_unlock(&philo->ctx->someone_died_mutex);
 	return (0);
 }
 
@@ -49,6 +52,8 @@ void	*philo_worker(void *philo_v)
 		if (print_action(philo, SLEEP))
 			break ;
 		ft_sleep(philo->ctx->time_to_sleep);
+		if (should_run(philo) == 0)
+			break;
 		if (print_action(philo, THINK))
 			break ;
 		if (get_think_time(philo) > 0)

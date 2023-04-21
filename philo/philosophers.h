@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/21 14:39:39 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/21 20:05:10 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo
 {
 	int				id;
 	t_fork			*left_fork;
+	int				is_full;
 	t_fork			*right_fork;
 	pthread_mutex_t	*eating_mutex;
 	pthread_mutex_t	last_eat_mutex;

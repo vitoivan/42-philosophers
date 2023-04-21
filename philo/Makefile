@@ -2,8 +2,8 @@ CC = clang
 CFLAGS = -Wall -Wextra -Werror -c -g
 DEBUG = -gdwarf-4
 LFLAGS = -pthread
-# DEBUG = -gdwarf-4 -fsanitize=thread
-# LFLAGS = -pthread -fsanitize=thread
+DEBUG = -gdwarf-4 -fsanitize=thread
+LFLAGS = -pthread -fsanitize=thread
 NAME = philo
 
 OBJ_DIR = dist
