@@ -15,6 +15,7 @@ TARGETS = 	main.c \
 			ft_isdigit.c \
 			context.c \
 			forks.c \
+			forks_utils.c \
 			ft_strlen.c \
 			ft_strcmp.c \
 			ft_sleep.c \

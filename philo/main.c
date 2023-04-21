@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/21 20:09:29 by coder            ###   ########.fr       */
+/*   Updated: 2023/04/21 18:49:37 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	*philo_worker(void *philo_v)
 			break ;
 		ft_sleep(philo->ctx->time_to_sleep);
 		if (should_run(philo) == 0)
-			break;
+			break ;
 		if (print_action(philo, THINK))
 			break ;
 		if (get_think_time(philo) > 0)

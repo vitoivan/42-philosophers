@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 22:14:02 by victor            #+#    #+#             */
-/*   Updated: 2023/04/21 20:07:46 by coder            ###   ########.fr       */
+/*   Updated: 2023/04/21 18:50:41 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	monitor_single_philo(t_ctx *ctx, int *i)
 	now = get_time();
 	pthread_mutex_lock(&ctx->print_mutex);
 	pthread_mutex_lock(&ctx->someone_died_mutex);
-	if (ctx->someone_died_flag == 1|| philo->is_full == 1)
+	if (ctx->someone_died_flag == 1 || philo->is_full == 1)
 	{
 		pthread_mutex_unlock(&ctx->print_mutex);
 		pthread_mutex_unlock(&ctx->someone_died_mutex);

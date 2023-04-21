@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/21 20:05:10 by coder            ###   ########.fr       */
+/*   Updated: 2023/04/21 18:53:02 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,10 @@ int					ft_sleep(time_t time);
 int					validate_philo_worker(t_philo *philo);
 int					get_last_eat(t_philo *philo);
 void				set_last_eat(t_philo *philo);
-int 				get_think_time(t_philo *philo);
+int					get_think_time(t_philo *philo);
+int					take_left_and_wait_right(t_philo *philo);
+int					take_right_and_wait_left(t_philo *philo);
+void				take_fork(t_fork *fork, t_philo *philo);
+int					get_fork_status(t_fork *fork);
+void				fold_fork(t_fork *fork);
 #endif
