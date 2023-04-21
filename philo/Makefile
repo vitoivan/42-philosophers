@@ -21,6 +21,7 @@ TARGETS = 	main.c \
 			print_action.c \
 			monitor.c \
 			eat.c \
+			think.c \
 			ft_atoi.c
 	
 OBJECTS = $(addprefix $(OBJ_DIR)/, $(TARGETS:.c=.o))

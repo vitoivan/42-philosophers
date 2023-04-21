@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:00:13 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 23:52:49 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/21 13:43:31 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	init_philo(t_ctx **ctx, int i)
 	(*ctx)->philos[i]->id = i + 1;
 	(*ctx)->philos[i]->eat_count = 0;
 	(*ctx)->philos[i]->last_eat = -1;
-	(*ctx)->philos[i]->left_fork = (*ctx)->forks[i];
-	(*ctx)->philos[i]->right_fork = (*ctx)->forks[(i + 1)
+	(*ctx)->philos[i]->left_fork = &(*ctx)->forks[i];
+	(*ctx)->philos[i]->right_fork = &(*ctx)->forks[(i + 1)
 		% (*ctx)->philo_count];
 	if (i % 2)
 	{
-		(*ctx)->philos[i]->left_fork = (*ctx)->forks[(i + 1)
+		(*ctx)->philos[i]->left_fork = &(*ctx)->forks[(i + 1)
 			% (*ctx)->philo_count];
-		(*ctx)->philos[i]->right_fork = (*ctx)->forks[i];
+		(*ctx)->philos[i]->right_fork = &(*ctx)->forks[i];
 	}
 	(*ctx)->philos[i]->thread = (pthread_t *)malloc(sizeof(pthread_t));
 	(*ctx)->philos[i]->ctx = *ctx;
@@ -55,11 +55,14 @@ static void	init_forks(t_ctx **ctx)
 	int	i;
 
 	i = 0;
-	(*ctx)->forks = malloc(sizeof(pthread_mutex_t *) * (*ctx)->philo_count);
+	(*ctx)->forks = malloc(sizeof(t_fork) * (*ctx)->philo_count);
 	while (i < (*ctx)->philo_count)
 	{
-		(*ctx)->forks[i] = malloc(sizeof(pthread_mutex_t));
-		pthread_mutex_init((*ctx)->forks[i], NULL);
+		(*ctx)->forks[i].ind = i;
+		(*ctx)->forks[i].is_taken = 0;
+		(*ctx)->forks[i].mutex = malloc(sizeof(pthread_mutex_t));
+		pthread_mutex_init((*ctx)->forks[i].mutex, NULL);
+		pthread_mutex_init(&(*ctx)->forks[i].is_taken_mutex, NULL);
 		i++;
 	}
 }
@@ -102,8 +105,8 @@ void	free_ctx(t_ctx *ctx)
 	while (i < ctx->philo_count)
 	{
 		free(ctx->philos[i]->thread);
-		pthread_mutex_destroy(ctx->forks[i]);
-		free(ctx->forks[i]);
+		pthread_mutex_destroy(ctx->forks[i].mutex);
+		pthread_mutex_destroy(&ctx->forks[i].is_taken_mutex);
 		pthread_mutex_destroy(ctx->philos[i]->eating_mutex);
 		free(ctx->philos[i]->eating_mutex);
 		free(ctx->philos[i]);

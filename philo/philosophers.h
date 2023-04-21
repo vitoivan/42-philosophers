@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:10:01 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 22:23:20 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/21 14:39:39 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,20 @@ typedef enum e_actions
 
 struct	s_ctx;
 
+typedef struct s_fork
+{
+	pthread_mutex_t	*mutex;
+	pthread_mutex_t	is_taken_mutex;
+	int				ind;
+	int				is_taken;
+	int				owner;
+}					t_fork;
+
 typedef struct s_philo
 {
 	int				id;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	t_fork			*left_fork;
+	t_fork			*right_fork;
 	pthread_mutex_t	*eating_mutex;
 	pthread_mutex_t	last_eat_mutex;
 	int				eating_flag;
@@ -53,7 +62,7 @@ typedef struct s_ctx
 	int				philo_count;
 	int				must_eat_count;
 	t_philo			**philos;
-	pthread_mutex_t	**forks;
+	t_fork			*forks;
 	pthread_mutex_t	someone_died_mutex;
 	pthread_mutex_t	print_mutex;
 	int				someone_died_flag;
@@ -96,4 +105,5 @@ int					ft_sleep(time_t time);
 int					validate_philo_worker(t_philo *philo);
 int					get_last_eat(t_philo *philo);
 void				set_last_eat(t_philo *philo);
+int 				get_think_time(t_philo *philo);
 #endif

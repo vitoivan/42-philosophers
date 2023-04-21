@@ -6,7 +6,7 @@
 /*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/18 22:31:07 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/21 14:42:14 by victor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ void	*philo_worker(void *philo_v)
 		fold_forks(philo);
 		if (print_action(philo, SLEEP))
 			break ;
-		else
-			ft_sleep(philo->ctx->time_to_sleep);
+		ft_sleep(philo->ctx->time_to_sleep);
 		if (print_action(philo, THINK))
 			break ;
+		if (get_think_time(philo) > 0)
+			usleep(get_think_time(philo) * 1000);
 	}
 	increase_full_philos(philo->ctx);
 	return (NULL);
