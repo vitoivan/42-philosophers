@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victor <victor@student.42.fr>              +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 10:29:24 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/21 18:49:37 by victor           ###   ########.fr       */
+/*   Updated: 2023/04/23 14:16:02 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	*philo_worker(void *philo_v)
 		else if (eat(philo))
 			break ;
 		fold_forks(philo);
+		if (should_run(philo) == 0)
+			break ;
 		if (print_action(philo, SLEEP))
 			break ;
 		ft_sleep(philo->ctx->time_to_sleep);
-		if (should_run(philo) == 0)
-			break ;
 		if (print_action(philo, THINK))
 			break ;
 		if (get_think_time(philo) > 0)
