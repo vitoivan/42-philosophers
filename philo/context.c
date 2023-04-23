@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 17:00:13 by victor.simo       #+#    #+#             */
-/*   Updated: 2023/04/21 20:05:26 by coder            ###   ########.fr       */
+/*   Updated: 2023/04/23 14:23:50 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	free_ctx(t_ctx *ctx)
 		pthread_mutex_destroy(ctx->philos[i]->eating_mutex);
 		free(ctx->philos[i]->eating_mutex);
 		free(ctx->philos[i]);
+		free(ctx->forks[i].mutex);
 		i++;
 	}
 	free(ctx->philos);
